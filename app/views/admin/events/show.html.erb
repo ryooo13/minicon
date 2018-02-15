@@ -1,31 +1,32 @@
 <p>
   <strong>Category:</strong>
-  konkatsu
+  <%= @event.event_category.name %>
 </p>
 
 <p>
   <strong>Title:</strong>
-  Nice Konkatsu Event
+  <%= @event.title %>
 </p>
 
 <p>
   <strong>Location:</strong>
-  銀座
+  <%= @event.location %>
 </p>
 
 <p>
   <strong>Start At:</strong>
-  2018/03/02 21:38
+  <%= @event.start_at.strftime('%Y/%m/%d %H:%M') %>
 </p>
 
 <p>
   <strong>Ticket Price:</strong>
-  5000円
+  <%= @event.ticket_price %>円
 </p>
 
 <p>
   <strong>Ticket Quantity:</strong>
-  50
+  <%= @event.ticket_quantity %>
 </p>
+
 <%= link_to 'Edit', edit_admin_event_path(@event) %> | 
 <%= link_to 'Back', admin_events_path %>
