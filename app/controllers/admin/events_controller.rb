@@ -30,12 +30,12 @@ class Admin::EventsController < ApplicationController
   def destroy
     
     @event.destroy
-    redirect_to  admin_event_path(@event), notice: 'Event was successfully destroy.'
+    redirect_to  admin_events_path(@event), notice: 'Event was successfully destroy.'
   end
   
   private
-  def set_event
-    @event = Event.find(params[:id])
-  end
+    def set_event
+      @event = Event.find(params[:id])
+    end
   
 end
