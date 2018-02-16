@@ -5,11 +5,11 @@ class PlacesController < ApplicationController
   # GET /places.json
   def index
     @places = Place.all
-    @hash = Gmaps4rails.build_markers(@places) do |place, marker|
-      marker.lat place.latitude
-      marker.lng place.longitude
-      marker.infowindow place.name
-    end
+      @hash = Gmaps4rails.build_markers(@places) do |place, marker|
+        marker.lat place.latitude
+        marker.lng place.longitude
+        marker.infowindow place.name
+      end
       # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
       #   marker.lat place.latitude
       #   marker.lng place.longitude
@@ -36,31 +36,42 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.json
   def create
-    @place = Place.new(place_params)
+    # @place = Place.new(place_params)
 
-    respond_to do |format|
-      if @place.save
-        format.html { redirect_to @place, notice: 'Place was successfully created.' }
-        format.json { render :show, status: :created, location: @place }
-      else
-        format.html { render :new }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @place.save
+    #     format.html { redirect_to @place, notice: 'Place was successfully created.' }
+    #     format.json { render :show, status: :created, location: @place }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @place.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    
+    place_params = params.require(:place).permit(:name, :description, :latitude, :longitude)
+    @place = Place.new(place_params)
+    @place.save
+    redirect_to places_path(@place), notice: 'Event was successfully created.'
+    
   end
 
   # PATCH/PUT /places/1
   # PATCH/PUT /places/1.json
   def update
-    respond_to do |format|
-      if @place.update(place_params)
-        format.html { redirect_to @place, notice: 'Place was successfully updated.' }
-        format.json { render :show, status: :ok, location: @place }
-      else
-        format.html { render :edit }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @place.update(place_params)
+    #     format.html { redirect_to @place, notice: 'Place was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @place }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @place.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    
+    place_params = params.require(:place).permit(:name, :description, :latitude, :longitude)
+    @place.update(place_params)
+    redirect_to admin_event_path(@place), notice: 'Event was successfully update.'
+    
   end
 
   # DELETE /places/1

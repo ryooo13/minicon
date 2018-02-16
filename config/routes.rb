@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
 
-  get 'map/index'
+  # get 'map/index'
 
   resources :places
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   root 'application#hello'
   
   namespace :admin do
+    # resources :places
     resources :event_categories
     resources :events
+    
   end
 end
